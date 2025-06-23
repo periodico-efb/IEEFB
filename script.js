@@ -1,26 +1,33 @@
-// script.js
+// script.js actualizado
 
-document.getElementById("articleForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+// Toggle menú hamburguesa
+function toggleMenu() {
+  const menu = document.getElementById('menu-lista');
+  menu.classList.toggle('activa');
+}
 
-  const title = document.getElementById("title").value;
-  const content = document.getElementById("content").value;
-  const sectionId = document.getElementById("section").value;
+// Ver más sobre nosotros
+function verMasSobreNosotros() {
+  alert("Aquí podrás mostrar más información sobre el equipo del periódico, su misión, visión, etc.");
+}
 
-  const section = document.getElementById(sectionId);
-
-  const article = document.createElement("article");
-  const h3 = document.createElement("h3");
-  h3.textContent = title;
-
-  const p = document.createElement("p");
-  p.textContent = content;
-
-  article.appendChild(h3);
-  article.appendChild(p);
-
-  section.appendChild(article);
-
-  // Limpiar formulario
-  document.getElementById("articleForm").reset();
+// Animación al hacer scroll hacia arriba
+let lastScrollTop = 0;
+window.addEventListener("scroll", function () {
+  const header = document.querySelector("header");
+  const currentScroll = window.scrollY;
+  if (currentScroll < lastScrollTop) {
+    header.style.transform = "translateY(0)";
+  } else {
+    header.style.transform = "translateY(-100%)";
+  }
+  lastScrollTop = currentScroll;
 });
+
+// Contador real de visitas con CounterAPI
+fetch("https://counterapi.com/api/hit/periodico2025/visitas")
+  .then(response => response.json())
+  .then(data => {
+    const contador = document.getElementById("contador-visitas");
+    if (contador) contador.textContent = `Visitas únicas: ${data.value}`;
+  });

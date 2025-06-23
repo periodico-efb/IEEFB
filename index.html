@@ -1,109 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Periódico Institucional Digital</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Periódico Escolar</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <header>
-
-    <h1>PERIÓDICO ESCOLAR</h1>
-    
-    <nav>
-      <ul>
-        <li><a href="#editorial">Editorial</a></li>
-        <li><a href="#nosotros">Nosotros</a></li>
-        <li><a href="#destacados">Destacados</a></li>
-        <li><a href="#eventos">Eventos</a></li>
-        <li><a href="#institución">Institución</a></li>
-        <li><a href="#social">Social</a></li>
-        <li><a href="#deporte">Deporte</a></li>
-        <li><a href="#salud">Salud</a></li>
-        <li><a href="#cultura">Cultura</a></li>
-        <li><a href="#entretenimineto">Notas Curiosas</a></li>
-      </ul>
-    </nav>
+    <h1 class="titulo">CLICK EDUARDO</h1>
+    <p class="subtitulo">El periódico escolar digital de la I.E. Eduardo Fernández Botero</p>
   </header>
 
-  <main>
-    <section id="editorial">
+  <nav class="menu">
+    <div class="menu-hamburguesa" onclick="toggleMenu()">☰</div>
+    <ul class="menu-lista" id="menu-lista">
+      <li><a href="#sobre" class="destacado">Nosotros</a></li>
+      <li><a href="#editorial" class="destacado">Editorial</a></li>
+      <li><a href="#destacados">Destacados</a></li>
+      <li><a href="#deportes">Deporte</a></li>
+      <li><a href="#salud">Salud</a></li>
+      <li><a href="#cultura">Cultura</a></li>
+      <li><a href="#eventos">Eventos</a></li>
+      <li><a href="#institucion">Institución</a></li>
+      <li><a href="#social">Social</a></li>
+      <li><a href="#curiosas">Notas Curiosas</a></li>
+      <li><a href="https://instagram.com/ie_eduardofernandezb" target="_blank">Instagram</a></li>
+    </ul>
+    <div class="buscador">
+      <input type="text" id="buscar" placeholder="Buscar...">
+      <button onclick="abrirDestacados()">🔍</button>
+    </div>
+  </nav>
+
+  <section id="sobre" class="sobre-nosotros">
+    <h2>Sobre Nosotros</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet.</p>
+    <button onclick="verMasSobreNosotros()">Ver más</button>
+  </section>
+
+  <main class="contenido">
+    <section id="editorial" class="seccion caja">
       <h2>Editorial</h2>
-      <!-- Artículos editoriales -->
+      <div class="articulo"><a href="#">Ejemplo de artículo editorial</a></div>
     </section>
-
-     <section id="nosotros">
-      <h2>Nosotros</h2>
-      <!-- información sobre el proyecto y su objetivo -->
-    </section>
-
-    <section id="destacados">
+    <section id="destacados" class="seccion caja">
       <h2>Destacados</h2>
-      <!-- Artículos Destacados -->
+      <!-- Artículos se cargan desde JS -->
     </section>
-
-    <section id="eventos">
-      <h2>Eventos</h2>
-      <!-- Eventos próximos o pryectos del colegio -->
-    </section>
-
-   <section id="institución">
-      <h2>Institución</h2>
-      <!-- Noticias del colegio o información importante  -->
-    </section>
-
-    <section id="social">
-      <h2>Social</h2>
-      <!-- Artículos sociales -->
-    </section>
-
-    <section id="deporte">
+    <section id="deportes" class="seccion caja">
       <h2>Deporte</h2>
-      <!-- Artículos deportivos -->
+      <div class="articulo"><a href="#">Título de noticia deportiva</a></div>
     </section>
-
-    <section id="salud">
+    <section id="salud" class="seccion caja">
       <h2>Salud</h2>
-      <!-- Artículos de salud -->
+      <div class="articulo"><a href="#">Artículo de salud</a></div>
     </section>
-
-    <section id="cultura">
+    <section id="cultura" class="seccion caja">
       <h2>Cultura</h2>
-      <!-- Artículos culturales aquí -->
+      <div class="articulo"><a href="#">Contenido cultural</a></div>
     </section>
-
-    <section id="entretenimineto">
+    <section id="eventos" class="seccion caja">
+      <h2>Eventos</h2>
+      <div class="articulo"><a href="#">Próximo proyecto institucional</a></div>
+    </section>
+    <section id="institucion" class="seccion caja">
+      <h2>Institución</h2>
+      <div class="articulo"><a href="#">Noticias institucionales</a></div>
+    </section>
+    <section id="social" class="seccion caja">
+      <h2>Social</h2>
+      <div class="articulo"><a href="#">Evento social reciente</a></div>
+    </section>
+    <section id="curiosas" class="seccion caja">
       <h2>Notas Curiosas</h2>
-      <!-- Artículos de entretenimineto  -->
+      <div class="articulo"><a href="#">Dato curioso del día</a></div>
     </section>
   </main>
 
-  <aside>
-    <h3>Panel de creación</h3>
-    <form id="articleForm">
-      <input type="text" id="title" placeholder="Título" required />
-      <textarea id="content" placeholder="Contenido" required></textarea>
-      <select id="section">
-        <option value="editorial">Editorial</option>
-        <option value="nosotros">Nosotros</option>
-        <option value="destacados">Destacados</option>
-        <option value="eventos">Eventos</option>
-        <option value="institución">Institución</option>
-        <option value="social">Social</option>
-        <option value="deporte">Deporte</option>
-        <option value="salud">Salud</option>
-        <option value="cultura">Cultura</option>
-        <option value="entretenimineto">Notas Curiosas</option>
-      </select>
-      <button type="submit">Agregar Artículo</button>
+  <section class="suscripcion">
+    <h2>Suscríbete para recibir noticias</h2>
+    <form action="https://formspree.io/f/mvgrwvnj" method="POST">
+      <input type="email" name="email" required placeholder="Tu correo electrónico">
+      <button type="submit">Suscribirme</button>
     </form>
-  </aside>
+  </section>
 
   <footer>
-    <p>&copy; 2025 I.E. Eduardo Fernández Botero</p>
+    <p>&copy; 2025 Periódico Escolar Digital - I.E. Eduardo Fernández Botero</p>
+    <p id="contador-visitas">Cargando visitas...</p>
   </footer>
-
-  <script src="script.js"></script>
 </body>
+
 </html>
