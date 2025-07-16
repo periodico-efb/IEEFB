@@ -8,7 +8,7 @@ function toggleMenu() {
 
 // Ver más sobre nosotros
 function verMasSobreNosotros() {
-  alert("Aquí podrás mostrar más información sobre el equipo del periódico, su misión, visión, etc.");
+  alert("información sobre nuestro equipo desarrollador, nuestra misión, visión");
 }
 
 // Animación al hacer scroll hacia arriba
