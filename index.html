@@ -9,11 +9,33 @@
   <script defer src="script.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
-
+  
 <body>
+<!-- caja para editor -->
+<section id="editor" class="seccion caja">
+  <h2>Publicar Artículo</h2>
+  <form id="form-articulo">
+    <input type="text" id="titulo" placeholder="Título del artículo" required />
+    <textarea id="contenido" placeholder="Contenido del artículo" required></textarea>
+    <select id="categoria" required>
+      <option value="destacados">Destacados</option>
+      <option value="deportes">Deportes</option>
+      <option value="salud">Salud</option>
+      <option value="cultura">Cultura</option>
+      <option value="eventos">Eventos</option>
+      <option value="institucion">Institución</option>
+      <option value="social">Social</option>
+      <option value="curiosas">Notas Curiosas</option>
+    </select>
+    <button type="submit">Publicar</button>
+  </form>
+</section>
+
   <header>
-    <h1 class="titulo">EDUARDO-NEWS </h1>
-    <p class="subtitulo">El periódico escolar digital de la I.E. Eduardo Fernández Botero</p>
+    <h1 class="titulo"> CLICK-EDUARDO </h1>
+    <p class="subtitulo">"Tu colegio en un solo clic"</p>
+    <p id="datetime"></p>
+    <div id="fecha" class="negrita"></div>
   </header>
 
   <nav class="menu">
@@ -41,13 +63,13 @@
     <h2>Sobre Nosotros</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet.</p>
     <button onclick="verMasSobreNosotros()">Ver más</button>
-  </section>
 
   <main class="contenido">
     <section id="editorial" class="seccion caja">
       <h2>Editorial</h2>
       <div class="articulo"><a href="#">Ejemplo de artículo editorial</a></div>
     </section>
+ 
     <section id="destacados" class="seccion caja">
       <h2>Destacados</h2>
       <!-- Artículos se cargan desde JS -->
