@@ -38,6 +38,31 @@
     <div id="fecha" class="negrita"></div>
   </header>
 
+  <div id="articulos"></div>
+<script type="module">
+  import { db } from './firebase-config.js';
+  import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const contenedor = document.getElementById("articulos");
+
+  async function cargarArticulos() {
+    const querySnapshot = await getDocs(collection(db, "artículos"));
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      contenedor.innerHTML += `
+        <article>
+          <h2>${data.titulo}</h2>
+          <p><strong>Categoría:</strong> ${data.categoria}</p>
+          <p>${data.contenido}</p>
+        </article>
+        <hr>
+      `;
+    });
+  }
+
+  cargarArticulos();
+</script>
+
   <nav class="menu">
     <div class="menu-hamburguesa" onclick="toggleMenu()">☰</div>
     <ul class="menu-lista" id="menu-lista">

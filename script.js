@@ -117,4 +117,3 @@ fetch("https://counterapi.com/api/hit/periodico2025/visitas")
     const contador = document.getElementById("contador-visitas");
     if (contador) contador.textContent = `Visitas únicas: ${data.value}`;
   });
-
