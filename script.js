@@ -51,13 +51,32 @@ document.getElementById("form-articulo").addEventListener("submit", async (e) =>
       categoria,
       fecha: new Date()
     });
-    alert("✅ Artículo publicado correctamente");
+    alert(" Artículo publicado correctamente");
     document.getElementById("form-articulo").reset();
   } catch (error) {
     console.error("Error al publicar artículo:", error);
-    alert("❌ Hubo un error. Intenta nuevamente.");
+    alert(" Hubo un error. Intenta nuevamente.");
   }
 });
+
+async function cargarArticulos() {
+  const querySnapshot = await getDocs(collection(db, "articulos"));
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+    mostrarArticulo(data);
+  });
+}
+
+function mostrarArticulo({ titulo, contenido, categoria }) {
+  const seccion = document.getElementById(categoria); // ejemplo: "destacados"
+  if (!seccion) return;
+
+  const div = document.createElement("div");
+  div.className = "articulo";
+  div.innerHTML = `<h3>${titulo}</h3><p>${contenido}</p>`;
+  seccion.appendChild(div);
+}
+
 
 // actualizar directamente desde firebase 
 window.addEventListener('DOMContentLoaded', async () => {
@@ -117,3 +136,7 @@ fetch("https://counterapi.com/api/hit/periodico2025/visitas")
     const contador = document.getElementById("contador-visitas");
     if (contador) contador.textContent = `Visitas únicas: ${data.value}`;
   });
+
+  document.addEventListener("DOMContentLoaded", () => {
+  cargarArticulos();
+});

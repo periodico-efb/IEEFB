@@ -257,3 +257,24 @@ footer {
     display: block;
   }
 }
+
+.articulo {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.articulo h3 {
+  margin-bottom: 5px;
+  color: #2c3e50;
+}
+
+.articulo p {
+  font-size: 16px;
+  line-height: 1.4;
+  color: #555;
+}
+
