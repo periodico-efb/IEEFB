@@ -97,11 +97,11 @@ a:hover {
     z-index: 1000;
     transition: padding 0.3s;
 }
-
 .header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: nowrap; /* Añade esta línea para evitar el salto de línea */
 }
 
 .logo {
@@ -117,7 +117,7 @@ a:hover {
 .logo-text {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: var(--primary-color);
     position: relative;
     z-index: 10;
