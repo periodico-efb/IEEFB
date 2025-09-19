@@ -1,128 +1,197 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Periódico Escolar</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="script.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click-Eduardo - Periódico Académico</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
-  
 <body>
-<!-- caja para editor -->
-<section id="editor" class="seccion caja">
-  <h2>Publicar Artículo</h2>
-  <form id="form-articulo">
-    <input type="text" id="titulo" placeholder="Título del artículo" required />
-    <textarea id="contenido" placeholder="Contenido del artículo" required></textarea>
-    <select id="categoria" required>
-      <option value="destacados">Destacados</option>
-      <option value="deportes">Deportes</option>
-      <option value="salud">Salud</option>
-      <option value="cultura">Cultura</option>
-      <option value="eventos">Eventos</option>
-      <option value="institucion">Institución</option>
-      <option value="social">Social</option>
-      <option value="curiosas">Notas Curiosas</option>
-    </select>
-    <button type="submit">Publicar</button>
-  </form>
-</section>
 
-  <header>
-    <h1 class="titulo"> CLICK-EDUARDO </h1>
-    <p class="subtitulo">"Tu colegio en un solo clic"</p>
-    <p id="datetime"></p>
-    <div id="fecha" class="negrita"></div>
-  </header>
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo">
+                <div class="logo-animation">
+                    <span class="logo-text">Click-Eduardo</span>
+                </div>
+            </a>
+            <nav class="nav">
+                <ul class="nav-list" id="navList">
+                    <li><a href="#recientes">Recientes</a></li>
+                    <li><a href="#destacados">Destacados</a></li>
+                    <li><a href="#calificados">Calificados</a></li>
+                    <li><a href="#institucion">Institución</a></li>
+                    <li><a href="#deporte">Deporte</a></li>
+                    <li><a href="#social">Social</a></li>
+                    <li><a href="#salud">Salud</a></li>
+                    <li><a href="#cultura">Cultura</a></li>
+                    <li><a href="#notas-curiosas">Notas Curiosas</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
 
-  <nav class="menu">
-    <div class="menu-hamburguesa" onclick="toggleMenu()">☰</div>
-    <ul class="menu-lista" id="menu-lista">
-      <li><a href="#nosotros" class="nosotros">Nosotros</a></li>
-      <li><a href="#editorial" class="destacado">Editorial</a></li>
-      <li><a href="#destacados">Destacados</a></li>
-      <li><a href="#deportes">Deporte</a></li>
-      <li><a href="#salud">Salud</a></li>
-      <li><a href="#cultura">Cultura</a></li>
-      <li><a href="#eventos">Eventos</a></li>
-      <li><a href="#institucion">Institución</a></li>
-      <li><a href="#social">Social</a></li>
-      <li><a href="#curiosas">Notas Curiosas</a></li>
-      <li><a href="https://instagram.com/ie_eduardofernandezb" target="_blank">Instagram</a></li>
-    </ul>
-    <div class="buscador">
-      <input type="text" id="buscar" placeholder="Buscar...">
-      <button onclick="abrirDestacados()">🔍</button>
+    <main>
+        <section class="main-hero">
+            <div class="hero-left">
+                <h1>Click-Eduardo</h1>
+                <p>La vida del colegio, los proyectos y las historias de estudiantes y docentes — tu colegio en un solo click.</p>
+                <a href="#articulos" class="btn primary">Explorar Secciones</a>
+            </div>
+            <div class="hero-right">
+                <div class="carousel hero-carousel" data-section="all-articles">
+                    <div class="carousel-track">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="video-section">
+            <div class="container">
+                <h2>Video Destacado</h2>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <div id="articulos">
+            <section class="section-row" id="recientes">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Recientes</h2>
+                    </div>
+                    <div class="carousel" data-section="recientes">
+                        <div class="carousel-track">
+                            </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section-row" id="destacados">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Destacados</h2>
+                    </div>
+                    <div class="carousel" data-section="destacados">
+                        <div class="carousel-track">
+                            </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section-row" id="calificados">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Calificados</h2>
+                    </div>
+                    <div class="carousel" data-section="calificados">
+                        <div class="carousel-track">
+                            </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-row" id="institucion">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Institución</h2>
+                    </div>
+                    <div class="carousel" data-section="institucion">
+                        <div class="carousel-track">
+                            </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-row" id="deporte">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Deporte</h2>
+                    </div>
+                    <div class="carousel" data-section="deporte">
+                        <div class="carousel-track">
+                            </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section-row" id="social">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Social</h2>
+                    </div>
+                    <div class="carousel" data-section="social">
+                        <div class="carousel-track">
+                            </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-row" id="salud">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Salud</h2>
+                    </div>
+                    <div class="carousel" data-section="salud">
+                        <div class="carousel-track">
+                            </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-row" id="cultura">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Cultura</h2>
+                    </div>
+                    <div class="carousel" data-section="cultura">
+                        <div class="carousel-track">
+                            </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section-row" id="notas-curiosas">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Notas Curiosas</h2>
+                    </div>
+                    <div class="carousel" data-section="notas-curiosas">
+                        <div class="carousel-track">
+                            </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="year"></span> Click-Eduardo. Todos los derechos reservados.</p>
+            <p>Visitas: <span id="visits-count">0</span></p>
+        </div>
+    </footer>
+
+    <div class="modal" id="modal" aria-hidden="true" role="dialog">
+        <div class="modal-content-wrapper">
+            <button class="modal-close" id="modalClose" aria-label="Cerrar artículo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="modal-content" id="modalContent">
+                </div>
+        </div>
     </div>
-  </nav>
 
-  <section id="sobre" class="sobre-nosotros">
-    <h2>Sobre Nosotros</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet.</p>
-    <button onclick="verMasSobreNosotros()">Ver más</button>
-
-  <main class="contenido">
-    <section id="editorial" class="seccion caja">
-      <h2>Editorial</h2>
-      <div class="articulo"><a href="#">Ejemplo de artículo editorial</a></div>
-    </section>
- 
-    <section id="destacados" class="seccion caja">
-      <h2>Destacados</h2>
-      <!-- Artículos se cargan desde JS -->
-    </section>
-    <section id="deportes" class="seccion caja">
-      <h2>Deporte</h2>
-      <div class="articulo"><a href="#">Título de noticia deportiva</a></div>
-    </section>
-    <section id="salud" class="seccion caja">
-      <h2>Salud</h2>
-      <div class="articulo"><a href="#">Artículo de salud</a></div>
-    </section>
-    <section id="cultura" class="seccion caja">
-      <h2>Cultura</h2>
-      <div class="articulo"><a href="#">Contenido cultural</a></div>
-    </section>
-    <section id="eventos" class="seccion caja">
-      <h2>Eventos</h2>
-      <div class="articulo"><a href="#">Próximo proyecto institucional</a></div>
-    </section>
-    <section id="institucion" class="seccion caja">
-      <h2>Institución</h2>
-      <div class="articulo"><a href="#">Noticias institucionales</a></div>
-    </section>
-    <section id="social" class="seccion caja">
-      <h2>Social</h2>
-      <div class="articulo"><a href="#">Evento social reciente</a></div>
-    </section>
-    <section id="curiosas" class="seccion caja">
-      <h2>Notas Curiosas</h2>
-      <div class="articulo"><a href="#">Dato curioso del día</a></div>
-    </section>
-  </main>
-
-  <section class="suscripcion">
-    <h2>Suscríbete para recibir noticias</h2>
-    <form action="https://formspree.io/f/mvgrwvnj" method="POST">
-      <input type="email" name="email" required placeholder="Tu correo electrónico">
-      <button type="submit">Suscribirme</button>
-    </form>
-  </section>
-
-  <footer>
-      <p>Síguenos en:</p>
-    <a href="https://instagram.com/ie_eduardofernandezb" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/2048px-Instagram_logo_2022.svg.png" alt="Instagram" width="30" height="30">
-    </a>
-    <a href="https://www.facebook.com/p/IE-Eduardo-Fernandez-Botero-100057335144354/?locale=es_LA" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook" width="30" height="30">
-    </a>
-    <p>&copy; 2025 Periódico Escolar Digital - I.E. Eduardo Fernández Botero</p>
-    <p id="contador-visitas">Cargando visitas...</p>
-  </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
 </body>
-
 </html>

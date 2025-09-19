@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click-Eduardo - Panel de Administración</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
+            color: #2d3748;
+            margin: 0;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #007000; }
+        .auth-form {
+            text-align: center;
+        }
+        .admin-panel { display: none; }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            background-color: #007000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-danger {
+            background-color: #e53e3e;
+        }
+        .article-list {
+            margin-top: 2rem;
+        }
+        .article-item {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .article-item h3 {
+            margin: 0;
+        }
+        .article-actions button {
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="authSection">
+            <h1 style="text-align: center;">Acceso al Panel de Administración</h1>
+            <div class="auth-form">
+                <p>Ingresa la contraseña para continuar:</p>
+                <input type="password" id="passwordInput" placeholder="Contraseña">
+                <button class="btn" id="loginBtn" style="margin-top: 1rem;">Acceder</button>
+            </div>
+        </div>
+
+        <div id="adminPanel" class="admin-panel">
+            <h1>Gestión de Artículos</h1>
+            
+            <form id="articleForm">
+                <input type="hidden" id="articleId">
+                <div class="form-group">
+                    <label for="title">Título</label>
+                    <input type="text" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Categoría</label>
+                    <input type="text" id="category" required>
+                </div>
+                <div class="form-group">
+                    <label for="excerpt">Extracto (Resumen corto)</label>
+                    <textarea id="excerpt" rows="2" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="content">Contenido completo</label>
+                    <textarea id="content" rows="6" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="author">Autor</label>
+                    <input type="text" id="author" required>
+                </div>
+                <div class="form-group">
+                    <label for="image">URL de la Imagen</label>
+                    <input type="text" id="image" required>
+                </div>
+                <div class="form-group">
+                    <label for="tags">Etiquetas (separadas por coma, ej: recientes,deporte)</label>
+                    <input type="text" id="tags" required>
+                </div>
+                <button type="submit" class="btn">Guardar Artículo</button>
+                <button type="button" class="btn btn-danger" id="cancelEditBtn" style="display: none;">Cancelar Edición</button>
+            </form>
+
+            <div class="article-list">
+                <h2>Lista de Artículos</h2>
+                <div id="articlesContainer">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lógica del panel de administración
+        const password = 'eduardo'; // Cambia esta contraseña por una más segura
+        const authSection = document.getElementById('authSection');
+        const adminPanel = document.getElementById('adminPanel');
+        const loginBtn = document.getElementById('loginBtn');
+        const passwordInput = document.getElementById('passwordInput');
+        
+        loginBtn.addEventListener('click', () => {
+            if (passwordInput.value === password) {
+                authSection.style.display = 'none';
+                adminPanel.style.display = 'block';
+                loadArticles();
+            } else {
+                alert('Contraseña incorrecta');
+            }
+        });
+
+        async function loadArticles() {
+            try {
+                const response = await fetch('articles.json');
+                const articles = await response.json();
+                renderArticles(articles);
+            } catch (error) {
+                console.error('Error al cargar artículos:', error);
+                document.getElementById('articlesContainer').innerHTML = '<p>Error al cargar los artículos. Asegúrate de que el archivo articles.json existe.</p>';
+            }
+        }
+        
+        function renderArticles(articles) {
+            const container = document.getElementById('articlesContainer');
+            container.innerHTML = '';
+            articles.forEach(article => {
+                const item = document.createElement('div');
+                item.className = 'article-item';
+                item.innerHTML = `
+                    <div>
+                        <h3>${article.title}</h3>
+                        <small>ID: ${article.id}</small>
+                    </div>
+                    <div class="article-actions">
+                        <button class="btn" onclick="editArticle('${article.id}')">Editar</button>
+                        <button class="btn btn-danger" onclick="deleteArticle('${article.id}')">Eliminar</button>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+        
+        document.getElementById('articleForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const article = {
+                id: form.articleId.value || 'art-' + Date.now(),
+                title: form.title.value,
+                category: form.category.value,
+                excerpt: form.excerpt.value,
+                content: form.content.value,
+                author: form.author.value,
+                date: new Date().toISOString().slice(0, 10),
+                image: form.image.value,
+                tags: form.tags.value.split(',').map(tag => tag.trim()),
+                score: 0
+            };
+            
+            let articles = await (await fetch('articles.json')).json();
+            const existingIndex = articles.findIndex(a => a.id === article.id);
+            if (existingIndex > -1) {
+                articles[existingIndex] = article;
+            } else {
+                articles.push(article);
+            }
+
+            // Aquí se usaría una API para guardar, pero para una solución simple, el código JavaScript
+            // no puede escribir archivos. Se puede usar localStorage o simular el proceso.
+            // Para fines de esta demostración, la función solo refresca la vista.
+            
+            // Simulación de guardado
+            console.log("Artículo guardado. En una aplicación real, esto se enviaría a un servidor.");
+            console.log(articles);
+            renderArticles(articles);
+            form.reset();
+            document.getElementById('cancelEditBtn').style.display = 'none';
+        });
+
+        async function editArticle(id) {
+            const articles = await (await fetch('articles.json')).json();
+            const article = articles.find(a => a.id === id);
+            if (!article) return;
+            
+            const form = document.getElementById('articleForm');
+            form.articleId.value = article.id;
+            form.title.value = article.title;
+            form.category.value = article.category;
+            form.excerpt.value = article.excerpt;
+            form.content.value = article.content;
+            form.author.value = article.author;
+            form.image.value = article.image;
+            form.tags.value = article.tags.join(', ');
+            
+            document.getElementById('cancelEditBtn').style.display = 'inline-block';
+        }
+        
+        async function deleteArticle(id) {
+            if (confirm('¿Estás seguro de que quieres eliminar este artículo?')) {
+                let articles = await (await fetch('articles.json')).json();
+                articles = articles.filter(a => a.id !== id);
+                
+                // Simulación de borrado
+                console.log("Artículo eliminado. En una aplicación real, esto se enviaría a un servidor.");
+                renderArticles(articles);
+            }
+        }
+        
+        document.getElementById('cancelEditBtn').addEventListener('click', () => {
+            document.getElementById('articleForm').reset();
+            document.getElementById('cancelEditBtn').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
