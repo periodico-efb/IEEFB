@@ -9,14 +9,63 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('.section-row, .video-section');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // Porcentaje de la sección que debe ser visible para activar
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-in-view');
+                    observer.unobserve(entry.target); // Dejar de observar una vez que se activa
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    });
+</script>
+
 <body>
 
-    <header class="header">
+  <header class="header">
         <div class="container">
             <a href="/" class="logo">
-                <div class="logo-animation">
-                    <span class="logo-text">Click-Eduardo</span>
+                <div class="logo-animated-ce">
+                    <svg viewBox="0 0 100 100" class="ce-svg" aria-label="Logo Click-Eduardo CE">
+                        <defs>
+                            <linearGradient id="grad-green" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#007000;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#005A00;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="grad-red" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#E53E3E;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#C53030;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="shadow">
+                                <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="rgba(0,0,0,0.3)"/>
+                            </filter>
+                        </defs>
+                        <circle cx="50" cy="50" r="48" fill="url(#grad-red)" class="outer-circle"></circle>
+                        <circle cx="50" cy="50" r="40" fill="white" class="inner-circle"></circle>
+                        
+                        <path id="pathC" d="M 60 25 A 25 25 0 1 0 35 50 A 25 25 0 0 0 60 75" 
+                              fill="none" stroke="url(#grad-green)" stroke-width="10" stroke-linecap="round" class="ce-path"/>
+                        
+                        <path id="pathE" d="M 40 40 L 65 40 M 40 50 L 60 50 M 40 60 L 65 60"
+                              fill="none" stroke="url(#grad-green)" stroke-width="10" stroke-linecap="round" class="ce-path"/>
+                    </svg>
                 </div>
+                <span class="logo-text">Click-Eduardo</span>
             </a>
             <nav class="nav">
                 <ul class="nav-list" id="navList">
@@ -38,7 +87,6 @@
             </button>
         </div>
     </header>
-
     <main>
         <section class="main-hero">
             <div class="hero-left">
