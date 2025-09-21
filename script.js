@@ -102,10 +102,9 @@ function createCard(a, isHeroCard = false) {
             <div class="card-meta">
                 <small class="meta">${escapeHtml(a.author)} • ${a.date}</small>
                 ${isHeroCard ? '' : `
-                    <button class="like-btn" data-article-id="${a.id}" aria-label="Me gusta">
-                        <span>❤</span> <span class="count">0</span>
-                    </button>
-                `}
+                  <button class="like-btn" data-article-id="${a.id}" aria-label="Me gusta">
+                  <span>❤</span>
+                  </button>`}
             </div>
         </div>
     `;
@@ -164,28 +163,35 @@ function setupMainCarousel() {
 /* ---------------------------
     Like handling (localStorage)
     --------------------------- */
+/* ---------------------------
+    Like handling (solo corazón, con animación y persistencia)
+    --------------------------- */
 function setupLikes() {
     const likesStoreKey = 'clickedu-likes';
     const likes = JSON.parse(localStorage.getItem(likesStoreKey) || '{}');
 
     $$('.like-btn').forEach(btn => {
         const articleId = btn.dataset.articleId;
-        
+
+        // Restaurar estado guardado
         if (likes[articleId]) {
             btn.classList.add('liked');
-            btn.querySelector('.count').textContent = likes[articleId];
-        } else {
-            btn.addEventListener('click', () => {
-                const currentLikes = (likes[articleId] || 0) + 1;
-                likes[articleId] = currentLikes;
-                localStorage.setItem(likesStoreKey, JSON.stringify(likes));
-                
-                $$(`.like-btn[data-article-id="${articleId}"]`).forEach(targetBtn => {
-                    targetBtn.classList.add('liked');
-                    targetBtn.querySelector('.count').textContent = currentLikes;
-                });
-            });
         }
+
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation(); // evita abrir el modal al dar clic
+
+            const isLiked = btn.classList.toggle('liked');
+            likes[articleId] = isLiked;
+            localStorage.setItem(likesStoreKey, JSON.stringify(likes));
+
+            // Reinicia animación si ya estaba likeado
+            if (isLiked) {
+                btn.classList.remove('liked');
+                void btn.offsetWidth; // forzar reflow
+                btn.classList.add('liked');
+            }
+        });
     });
 }
 
