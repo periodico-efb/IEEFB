@@ -34,7 +34,6 @@ const Data = (() => {
     ];
 
     const VISITS_KEY = 'clickedu-visits';
-    const LIKES_KEY = 'clickedu-likes';
 
     /**
      * Obtiene los datos de un artículo por su ID.
@@ -70,46 +69,7 @@ const Data = (() => {
         return visits;
     };
 
-    /**
-     * Gestiona los "likes" en localStorage.
-     * @param {string} articleId - El ID del artículo.
-     * @returns {boolean} - Nuevo estado del like.
-     */
-    const toggleLike = (articleId) => {
-        let likesStore = {};
-        try {
-            likesStore = JSON.parse(localStorage.getItem(LIKES_KEY) || '{}');
-        } catch (e) {
-            console.error('Failed to parse likes from localStorage', e);
-        }
-
-        likesStore[articleId] = !likesStore[articleId];
-
-        try {
-            localStorage.setItem(LIKES_KEY, JSON.stringify(likesStore));
-        } catch (e) {
-            console.error('Failed to save likes to localStorage', e);
-        }
-
-        return likesStore[articleId];
-    };
-
-    /**
-     * Comprueba si un artículo tiene like.
-     * @param {string} articleId - El ID del artículo.
-     * @returns {boolean}
-     */
-    const hasLike = (articleId) => {
-        try {
-            const likesStore = JSON.parse(localStorage.getItem(LIKES_KEY) || '{}');
-            return !!likesStore[articleId];
-        } catch (e) {
-            console.error('Failed to parse likes from localStorage', e);
-            return false;
-        }
-    };
-
-    return { getArticle, getArticlesByTag, getVisits, toggleLike, hasLike };
+    return { getArticle, getArticlesByTag, getVisits };
 })();
 
 /**
@@ -188,11 +148,16 @@ const App = (() => {
      * Renderiza los artículos en las secciones de la página.
      */
     const renderSections = () => {
+        // Mapea los ID de las secciones del HTML a los tags de los artículos
         const sectionsData = {
             'calificados': Data.getArticlesByTag('calificados', 'score').slice(0, 10),
             'recientes': Data.getArticlesByTag('recientes', 'date').slice(0, 10),
             'cultura': Data.getArticlesByTag('cultura', 'date').slice(0, 10),
             'deporte': Data.getArticlesByTag('deporte', 'date').slice(0, 10),
+            'social': Data.getArticlesByTag('social', 'date').slice(0, 10),
+            'institucion': Data.getArticlesByTag('institucion', 'date').slice(0, 10),
+            'salud': Data.getArticlesByTag('salud', 'date').slice(0, 10),
+            'notas-curiosas': Data.getArticlesByTag('notas-curiosas', 'date').slice(0, 10),
         };
 
         Object.entries(sectionsData).forEach(([tag, articles]) => {
@@ -204,6 +169,7 @@ const App = (() => {
                     carouselTrack.appendChild(card);
                 });
             } else {
+                // Si no hay artículos, oculta toda la sección
                 DOM.get(`.carousel[data-section="${tag}"]`)?.closest('.section-row')?.remove();
             }
         });
@@ -216,10 +182,8 @@ const App = (() => {
      */
     const createCard = (article) => {
         const card = DOM.createElement('article', { class: 'article-card', 'data-id': article.id });
-        const hasLike = Data.hasLike(article.id);
-
         card.innerHTML = `
-            <a href="#" class="article-link" data-id="${article.id}">
+            <a href="#" class="article-link" data-id="${article.id}" aria-label="Leer más sobre ${escapeHtml(article.title)}">
                 <div class="article-image-container">
                     <img class="article-image lazy" data-src="${escapeHtml(article.image)}" alt="${escapeHtml(article.title)}">
                 </div>
@@ -230,10 +194,7 @@ const App = (() => {
                 </a>
                 <p class="article-excerpt">${escapeHtml(article.excerpt)}</p>
                 <div class="card-meta">
-                    <span>${escapeHtml(article.author)} • ${article.date}</span>
-                    <button class="like-btn ${hasLike ? 'liked' : ''}" data-article-id="${article.id}" aria-label="Me gusta este artículo">
-                        ❤
-                    </button>
+                    <span class="meta-item">${escapeHtml(article.author)} • ${article.date}</span>
                 </div>
             </div>
         `;
@@ -259,7 +220,7 @@ const App = (() => {
         heroArticles.forEach((art, index) => {
             const slide = DOM.createElement('div', { 
                 class: `hero-slider-item ${index === 0 ? 'active' : ''}`, 
-                style: `background-image: url(${art.image})`,
+                style: `background-image: url(${escapeHtml(art.image)})`,
                 'data-id': art.id
             });
             slide.innerHTML = `<div class="hero-slider-content"><h2>${escapeHtml(art.title)}</h2><p>${escapeHtml(art.excerpt)}</p></div>`;
@@ -311,7 +272,7 @@ const App = (() => {
     };
 
     /**
-     * Configura el menú de navegación para móviles.
+     * Configura el menú de navegación para móviles y el scroll suave.
      */
     const setupHeader = () => {
         if (!elements.menuToggle || !elements.mainNav) return;
@@ -322,8 +283,17 @@ const App = (() => {
             elements.mainNav.classList.toggle('is-active');
         });
 
+        // Configura el scroll suave para los enlaces de navegación
         DOM.getAll('.nav-link', elements.mainNav).forEach(link => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', (e) => {
+                const targetId = e.target.getAttribute('href').substring(1);
+                const targetSection = DOM.get(`#${targetId}`);
+                if (targetSection) {
+                    e.preventDefault();
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+                
+                // Cierra el menú en móviles después de hacer clic
                 if (window.innerWidth < 768) {
                     elements.menuToggle.setAttribute('aria-expanded', 'false');
                     elements.mainNav.classList.remove('is-active');
@@ -372,8 +342,8 @@ const App = (() => {
         elements.modal.classList.add('is-active');
         document.body.style.overflow = 'hidden';
 
-        DOM.get('#shareBtn')?.addEventListener('click', () => handleShare(article));
-        DOM.get('#downloadPdf')?.addEventListener('click', () => handleDownloadPDF(article));
+        DOM.get('#shareBtn', elements.modal)?.addEventListener('click', () => handleShare(article));
+        DOM.get('#downloadPdf', elements.modal)?.addEventListener('click', () => handleDownloadPDF(article));
     };
 
     /**
@@ -391,22 +361,15 @@ const App = (() => {
      */
     const setupGlobalEventListeners = () => {
         document.body.addEventListener('click', (e) => {
-            const target = e.target;
-            
-            // Lógica para abrir el modal
-            const articleLink = target.closest('.article-link');
+            const articleLink = e.target.closest('.article-link');
             if (articleLink) {
                 e.preventDefault();
                 openModal(articleLink.dataset.id);
-                return;
             }
 
-            // Lógica para el botón de "Like"
-            const likeBtn = target.closest('.like-btn');
-            if (likeBtn) {
-                const articleId = likeBtn.dataset.articleId;
-                const isLiked = Data.toggleLike(articleId);
-                likeBtn.classList.toggle('liked', isLiked);
+            // Delegar el evento del botón de cierre del modal, ya que se renderiza dinámicamente
+            if (e.target.closest('#modalClose')) {
+                closeModal();
             }
         });
     };
@@ -457,7 +420,7 @@ const App = (() => {
     const handleDownloadPDF = (article) => {
         const { jsPDF } = window.jspdf || {};
         if (!jsPDF) {
-            alert("La funcionalidad de descarga de PDF no está disponible.");
+            alert("La funcionalidad de descarga de PDF no está disponible. Por favor, asegúrate de que la librería jsPDF está incluida.");
             console.error("Librería jsPDF no encontrada.");
             return;
         }
@@ -478,6 +441,7 @@ const App = (() => {
      * @returns {string}
      */
     const escapeHtml = (str) => {
+        if (typeof str !== 'string') return '';
         const div = document.createElement('div');
         div.textContent = str;
         return div.innerHTML;

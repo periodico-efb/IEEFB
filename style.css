@@ -271,15 +271,13 @@ a:hover {
 
 .social-links {
     display: flex;
-    gap: var(--spacing-2);
-}
-.social-links .icon {
-    width: 24px;
-    height: 24px;
-    transition: transform var(--transition-fast);
+    gap: var(--spacing-4); /* Aumenta el espacio entre los iconos */
+    margin-left: auto; /* Mueve los iconos a la izquierda */
 }
 .social-links a {
     color: var(--color-text-light);
+    font-size: 1.5rem; /* Aumenta el tamaño del icono */
+    transition: color var(--transition-fast), transform var(--transition-fast);
 }
 .social-links a:hover {
     text-decoration: none;
@@ -380,7 +378,7 @@ a:hover {
     transform: scale(1.2);
 }
 
-.news-section {
+.section-row {
     padding: var(--spacing-6) 0;
 }
 .section-header {
@@ -390,7 +388,7 @@ a:hover {
 .section-title {
     font-family: var(--font-heading);
     font-weight: 700;
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 4vw, 2.5rem); /* Títulos de sección más pequeños */
     text-align: center;
     text-transform: uppercase;
     color: var(--color-text-dark);
@@ -500,6 +498,19 @@ a:hover {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+.about-us-section {
+    background-color: var(--color-background-secondary);
+    text-align: center;
+    padding: var(--spacing-6) 0;
+}
+.about-us-content {
+    max-width: 800px;
+}
+.about-us-content p {
+    color: var(--color-text-light);
+    line-height: 1.8;
 }
 
 /* ==========================================================================
@@ -616,18 +627,37 @@ a:hover {
     padding-bottom: var(--spacing-3);
     margin-top: auto;
 }
-.footer-flag-stripes {
-    height: 8px;
-    background: linear-gradient(
-        90deg,
-        var(--flag-green) 0%,
-        var(--flag-green) 33.3%,
-        var(--flag-white) 33.3%,
-        var(--flag-white) 66.6%,
-        var(--flag-red) 66.6%,
-        var(--flag-red) 100%
-    );
+footer {
+    position: relative;
+    background-color: #212529;
+    color: #fff;
+    padding-top: 40px;
 }
+
+.bandera-franjas-IEEFEB {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    display: flex;
+    background-color: #FFFFFF;
+}
+
+.bandera-franjas-IEEFEB::before,
+.bandera-franjas-IEEFEB::after {
+    content: "";
+    flex-grow: 1;
+}
+
+.bandera-franjas-IEEFEB::before {
+    background-color: #008000;
+}
+
+.bandera-franjas-IEEFEB::after {
+    background-color: #FF0000;
+}
+
 .footer-content-wrapper {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
@@ -812,4 +842,23 @@ a:hover {
         top: var(--spacing-2);
         right: var(--spacing-2);
     }
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-top: 1px solid #ccc; /* Línea de separación opcional */
+}
+
+.footer-logos {
+    display: flex;
+    gap: 20px; 
+    
+}
+
+.footer-logo {
+    height: 40px; 
+    border-radius: 50%;
 }
