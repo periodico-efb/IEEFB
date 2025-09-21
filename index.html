@@ -10,36 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const sections = document.querySelectorAll('.section-row, .video-section');
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1 // Porcentaje de la sección que debe ser visible para activar
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-in-view');
-                    observer.unobserve(entry.target); // Dejar de observar una vez que se activa
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    });
-</script>
-
 <body>
-
-  <header class="header">
+    <header class="header" role="banner">
         <div class="container">
-            <a href="/" class="logo">
+            <a href="/" class="logo" aria-label="Ir a la página de inicio">
                 <div class="logo-animated-ce">
                     <svg viewBox="0 0 100 100" class="ce-svg" aria-label="Logo Click-Eduardo CE">
                         <defs>
@@ -59,15 +33,15 @@
                         <circle cx="50" cy="50" r="40" fill="white" class="inner-circle"></circle>
                         
                         <path id="pathC" d="M 60 25 A 25 25 0 1 0 35 50 A 25 25 0 0 0 60 75" 
-                              fill="none" stroke="url(#grad-green)" stroke-width="10" stroke-linecap="round" class="ce-path"/>
+                                fill="none" stroke="url(#grad-green)" stroke-width="10" stroke-linecap="round" class="ce-path"/>
                         
                         <path id="pathE" d="M 40 40 L 65 40 M 40 50 L 60 50 M 40 60 L 65 60"
-                              fill="none" stroke="url(#grad-green)" stroke-width="10" stroke-linecap="round" class="ce-path"/>
+                                fill="none" stroke="url(#grad-green)" stroke-width="10" stroke-linecap="round" class="ce-path"/>
                     </svg>
                 </div>
                 <span class="logo-text">Click-Eduardo</span>
             </a>
-            <nav class="nav">
+            <nav class="nav" role="navigation" aria-label="Menú principal">
                 <ul class="nav-list" id="navList">
                     <li><a href="#recientes">Recientes</a></li>
                     <li><a href="#destacados">Destacados</a></li>
@@ -87,7 +61,7 @@
             </button>
         </div>
     </header>
-    <main>
+    <main id="main-content">
         <section class="main-hero">
             <div class="hero-left">
                 <h1>Click-Eduardo</h1>
@@ -97,7 +71,7 @@
             <div class="hero-right">
                 <div class="carousel hero-carousel" data-section="all-articles">
                     <div class="carousel-track">
-                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -119,7 +93,7 @@
                     </div>
                     <div class="carousel" data-section="recientes">
                         <div class="carousel-track">
-                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -131,7 +105,7 @@
                     </div>
                     <div class="carousel" data-section="destacados">
                         <div class="carousel-track">
-                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -143,7 +117,7 @@
                     </div>
                     <div class="carousel" data-section="calificados">
                         <div class="carousel-track">
-                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -155,7 +129,7 @@
                     </div>
                     <div class="carousel" data-section="institucion">
                         <div class="carousel-track">
-                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -167,7 +141,7 @@
                     </div>
                     <div class="carousel" data-section="deporte">
                         <div class="carousel-track">
-                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -179,7 +153,7 @@
                     </div>
                     <div class="carousel" data-section="social">
                         <div class="carousel-track">
-                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -191,7 +165,7 @@
                     </div>
                     <div class="carousel" data-section="salud">
                         <div class="carousel-track">
-                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -203,7 +177,7 @@
                     </div>
                     <div class="carousel" data-section="cultura">
                         <div class="carousel-track">
-                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -215,14 +189,14 @@
                     </div>
                     <div class="carousel" data-section="notas-curiosas">
                         <div class="carousel-track">
-                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <p>&copy; <span id="year"></span> Click-Eduardo. Todos los derechos reservados.</p>
             <p>Visitas: <span id="visits-count">0</span></p>
@@ -235,7 +209,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             <div class="modal-content" id="modalContent">
-                </div>
+            </div>
         </div>
     </div>
 

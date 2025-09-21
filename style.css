@@ -25,17 +25,20 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--bg-color);
-    overflow-x: hidden; 
+    color: var(--primary-text);
+    background-color: var(--primary-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease;
 }
 
+/* CORRECCIÓN: Ajuste de padding para que el contenido tenga más espacio en móviles */
 .container {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 1.5rem; /* Reducido de 2rem para móviles */
 }
 
 h1, h2, h3 {
@@ -62,7 +65,7 @@ h3 {
 
 p {
     margin-bottom: 1.25rem;
-    font-size: 1.1rem; /* Ligeramente más grande para comodidad */
+    font-size: 1.1rem;
 }
 
 a {
@@ -97,7 +100,7 @@ a:hover {
 
 .btn.primary:hover {
     background-color: var(--primary-color-hover);
-    transform: translateY(-5px); /* Efecto de levitación más pronunciado */
+    transform: translateY(-5px);
     box-shadow: 0 12px 25px rgba(0, 112, 0, 0.4);
 }
 
@@ -125,28 +128,8 @@ a:hover {
     top: 0;
     z-index: 1000;
     transition: padding 0.3s, box-shadow 0.3s;
-    border-bottom: 4px solid var(--primary-color); /* Franja verde */
+    border-bottom: 4px solid var(--primary-color);
     position: relative;
-}
-
-.header::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background-color: white; /* Franja blanca */
-}
-
-.header::before {
-    content: '';
-    position: absolute;
-    bottom: -12px;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background-color: var(--accent-1); /* Franja roja */
 }
 
 .header .container {
@@ -189,7 +172,7 @@ a:hover {
     left: 0;
     width: 0;
     height: 100%;
-    background: rgba(0, 112, 0, 0.15); /* Sombra más sutil */
+    background: rgba(0, 112, 0, 0.15);
     transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     z-index: 1;
 }
@@ -210,7 +193,7 @@ a:hover {
 }
 
 .nav-list li a {
-    color: var(--secondary-text); /* Color de texto más profesional */
+    color: var(--secondary-text);
     font-weight: 600;
     padding: 1rem 1.5rem;
     display: block;
@@ -229,7 +212,7 @@ a:hover {
     left: 50%;
     transform: translateX(-50%);
     width: 0;
-    height: 4px; /* Barra más gruesa */
+    height: 4px;
     background-color: var(--primary-color);
     transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -244,18 +227,18 @@ a:hover {
 .hamburger {
     display: none;
     flex-direction: column;
-    gap: 0.4rem; /* Espaciado ajustado */
+    gap: 0.4rem;
     cursor: pointer;
     background: none;
     border: none;
     z-index: 2000;
-    padding: 0.75rem; /* Área de clic más grande */
+    padding: 0.75rem;
     will-change: transform;
 }
 
 .hamburger .bar {
-    width: 32px; /* Más ancho */
-    height: 4px; /* Más grueso */
+    width: 32px;
+    height: 4px;
     background-color: var(--primary-text);
     border-radius: 2px;
     transition: transform 0.4s ease, opacity 0.4s;
@@ -265,12 +248,12 @@ a:hover {
     .nav {
         position: fixed;
         top: 0;
-        right: -110%; /* Sale de la vista por completo */
+        right: -110%;
         width: 85%;
         max-width: 350px;
         height: 100vh;
         background-color: white;
-        box-shadow: -6px 0 20px rgba(0,0,0,0.3); /* Sombra más pronunciada */
+        box-shadow: -6px 0 20px rgba(0,0,0,0.3);
         transition: right 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         z-index: 1500;
         padding-top: 6rem;
@@ -338,6 +321,7 @@ a:hover {
 /* ================================
     Hero Section & Carousel
     ================================ */
+/* CORRECCIÓN: Flexbox para un mejor responsive */
 .main-hero {
     display: flex;
     flex-direction: column;
@@ -349,7 +333,7 @@ a:hover {
     position: relative;
     overflow: hidden;
     border-radius: 20px;
-    margin: 2rem;
+    margin: 2rem 0; /* Ajuste para eliminar márgenes laterales */
 }
 
 @media (min-width: 900px) {
@@ -371,24 +355,16 @@ a:hover {
     }
 }
 
-.hero-carousel,
-.carousel {
-    /* Los márgenes negativos hacen que el carrusel se extienda a los bordes de la pantalla. */
-    margin-left: -1rem;
-    margin-right: -1rem;
-    
-    /* El padding interno asegura que el contenido no quede pegado a los bordes. */
-    padding-left: 1rem;
-    padding-right: 1rem;
-
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    -webkit-overflow-scrolling: touch;
-}
-
-.carousel::-webkit-scrollbar {
-    display: none;
+.hero-carousel {
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: var(--shadow-medium);
+    cursor: grab;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    will-change: transform;
 }
 
 .hero-carousel:hover {
@@ -398,7 +374,7 @@ a:hover {
 
 .hero-carousel .carousel-track {
     display: flex;
-    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* Transición más fluida */
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
     gap: 2.5rem;
     will-change: transform;
 }
@@ -501,7 +477,7 @@ a:hover {
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
     border-radius: 20px;
@@ -569,13 +545,13 @@ a:hover {
 
 .carousel-track {
     display: flex;
-    gap: 2.5rem; /* Espacio entre tarjetas */
+    gap: 2.5rem;
     padding-bottom: 1.5rem;
 }
 
 .card {
     flex-shrink: 0;
-    flex-basis: 350px; /* Tamaño base ligeramente más grande */
+    flex-basis: 350px;
     background-color: white;
     border-radius: 20px;
     overflow: hidden;
@@ -588,33 +564,30 @@ a:hover {
     will-change: transform;
 }
 
+/* CORRECCIÓN: Las tarjetas en móviles ahora ocupan más espacio */
 @media (max-width: 768px) {
     .card {
-        flex-basis: 80vw;
+        flex-basis: 90vw; /* Ajuste para que se vea mejor en móviles */
     }
 }
+/* Se elimina el media query para 480px, ya que el de 768px es suficiente */
 
-@media (max-width: 480px) {
-    .card {
-        flex-basis: 90vw;
-    }
-}
 
 .card:hover {
-    transform: translateY(-12px); /* Efecto de levitación más dramático */
+    transform: translateY(-12px);
     box-shadow: 0 16px 30px rgba(0,0,0,0.2);
 }
 
 .card img {
     width: 100%;
-    height: 250px; /* Altura ligeramente aumentada */
+    height: 250px;
     object-fit: cover;
     display: block;
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .card:hover img {
-    transform: scale(1.1); /* Zoom más pronunciado */
+    transform: scale(1.1);
 }
 
 .card-body {
@@ -663,8 +636,8 @@ a:hover {
 }
 
 /* ================================
-   Like Button (Heart Only)
-   ================================ */
+    Like Button (Heart Only)
+    ================================ */
 .like-btn {
     background: transparent;
     border: none;
@@ -691,14 +664,12 @@ a:hover {
     animation: heart-burst 0.5s ease forwards;
 }
 
-/* Latido */
 @keyframes heart-burst {
     0% { transform: scale(1); }
     30% { transform: scale(1.4); }
     60% { transform: scale(0.9); }
     100% { transform: scale(1); }
 }
-
 
 /* FOOTER */
 .footer {
@@ -718,14 +689,14 @@ a:hover {
     left: 0;
     width: 100%;
     height: 12px;
-    background-image: linear-gradient(to right, #007000, white, #E53E3E); /* Combinación lineal de colores */
-    transform: translateY(-100%); /* Oculta la bandera al inicio */
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Animación para que aparezca */
+    background-image: linear-gradient(to right, #007000, white, #E53E3E);
+    transform: translateY(-100%);
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: transform;
 }
 
 .footer.is-in-view::before {
-    transform: translateY(0); /* Muestra la bandera al llegar a la sección */
+    transform: translateY(0);
 }
 
 .footer p {
@@ -742,7 +713,7 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.85); /* Fondo más oscuro */
+    background-color: rgba(0,0,0,0.85);
     backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
@@ -762,10 +733,10 @@ a:hover {
 .modal-content-wrapper {
     background-color: white;
     padding: 3.5rem;
-    border-radius: 24px; /* Bordes más suaves */
+    border-radius: 24px;
     max-width: 1000px;
     width: 100%;
-    max-height: 95vh; /* Se ajusta mejor en pantallas pequeñas */
+    max-height: 95vh;
     overflow-y: auto;
     position: relative;
     box-shadow: 0 25px 60px rgba(0,0,0,0.5);
@@ -796,8 +767,19 @@ a:hover {
     transform: rotate(90deg) scale(1.2);
 }
 
-@media (max-width: 768px) {
-    .modal-content-wrapper {
-        padding: 2rem;
-    }
+/* AÑADIDO: Estilos de tipografía para el contenido del modal */
+#modalContent h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color, #007000);
+}
+
+#modalContent p {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    color: #333;
 }
