@@ -102,18 +102,20 @@ function createCard(a, isHeroCard = false) {
             <div class="card-meta">
                 <small class="meta">${escapeHtml(a.author)} • ${a.date}</small>
                 ${isHeroCard ? '' : `
-                  <button class="like-btn" data-article-id="${a.id}" aria-label="Me gusta">
-                  <span>❤</span>
-                  </button>`}
+                <button class="like-btn" data-article-id="${a.id}" aria-label="Me gusta">
+                <span>❤</span>
+                </button>`}
             </div>
         </div>
     `;
 
+    // Evita que el modal se abra si el clic fue en el botón de "Me gusta"
     el.addEventListener('click', (e) => {
-        const target = e.target.closest('.like-btn');
-        if (!target) {
-            openArticleModal(a.id);
+        if (e.target.closest('.like-btn')) {
+            e.stopPropagation();
+            return;
         }
+        openArticleModal(a.id);
     });
 
     let lastClick = 0;
@@ -154,15 +156,13 @@ function setupMainCarousel() {
     
     setInterval(() => {
         currentIndex = (currentIndex + 1) % totalCards;
+        // Se obtiene el ancho de la tarjeta y el espacio entre tarjetas para un cálculo más preciso.
         const cardWidth = track.firstElementChild.offsetWidth;
         const gap = parseFloat(window.getComputedStyle(track).gap);
         track.style.transform = `translateX(-${currentIndex * (cardWidth + gap)}px)`;
     }, 5000); // Cambia de slide cada 5 segundos
 }
 
-/* ---------------------------
-    Like handling (localStorage)
-    --------------------------- */
 /* ---------------------------
     Like handling (solo corazón, con animación y persistencia)
     --------------------------- */
@@ -275,8 +275,9 @@ function setupHamburger() {
         burger.setAttribute('aria-expanded', String(isOpen));
     });
 
+    // Cierra el menú de hamburguesa cuando se hace clic en un enlace de navegación
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-        if (window.innerWidth < 769) {
+        if (window.innerWidth < 769) { // Se cierra solo en dispositivos móviles
             nav.classList.remove('show');
             burger.classList.remove('active');
             burger.setAttribute('aria-expanded', 'false');

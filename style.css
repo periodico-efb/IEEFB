@@ -34,11 +34,10 @@ body {
     transition: background-color 0.3s ease;
 }
 
-/* CORRECCIÓN: Ajuste de padding para que el contenido tenga más espacio en móviles */
 .container {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 0 1.5rem; /* Reducido de 2rem para móviles */
+    padding: 0 1.5rem; 
 }
 
 h1, h2, h3 {
@@ -195,7 +194,7 @@ a:hover {
 .nav-list li a {
     color: var(--secondary-text);
     font-weight: 600;
-    padding: 1rem 1.5rem;
+    padding: 1rem 1.25rem; /* Ajustado para reducir el espaciado en escritorio */
     display: block;
     position: relative;
     transition: color 0.3s ease;
@@ -321,7 +320,6 @@ a:hover {
 /* ================================
     Hero Section & Carousel
     ================================ */
-/* CORRECCIÓN: Flexbox para un mejor responsive */
 .main-hero {
     display: flex;
     flex-direction: column;
@@ -333,7 +331,7 @@ a:hover {
     position: relative;
     overflow: hidden;
     border-radius: 20px;
-    margin: 2rem 0; /* Ajuste para eliminar márgenes laterales */
+    margin: 2rem 0;
 }
 
 @media (min-width: 900px) {
@@ -356,7 +354,7 @@ a:hover {
 }
 
 .hero-carousel {
-    max-width: 600px;
+    max-width: 500px; /* Reducido para que sea más pequeño y proporcionado */
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -564,14 +562,11 @@ a:hover {
     will-change: transform;
 }
 
-/* CORRECCIÓN: Las tarjetas en móviles ahora ocupan más espacio */
 @media (max-width: 768px) {
     .card {
-        flex-basis: 90vw; /* Ajuste para que se vea mejor en móviles */
+        flex-basis: 80vw; /* Ajustado para que se vea mejor en móviles, dejando un poco de espacio */
     }
 }
-/* Se elimina el media query para 480px, ya que el de 768px es suficiente */
-
 
 .card:hover {
     transform: translateY(-12px);
