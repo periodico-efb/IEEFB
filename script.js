@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupModal();
     setupLazy();
     setupLikes();
+    setupIntersections(); // Nueva función para manejar animaciones por scroll
 });
 
 function handleVisits() {
@@ -118,16 +119,19 @@ function createCard(a, isHeroCard = false) {
         openArticleModal(a.id);
     });
 
-    let lastClick = 0;
-    el.addEventListener('dblclick', () => {
+    let lastClickTime = 0;
+    el.addEventListener('click', (e) => {
         const now = Date.now();
-        if (now - lastClick < 500) {
+        const doubleClickTime = 300; // milisegundos
+        
+        if (now - lastClickTime < doubleClickTime) {
+            e.preventDefault(); // Evita que se abra el modal
             const likeBtn = el.querySelector('.like-btn');
-            if (likeBtn && !likeBtn.classList.contains('liked')) {
+            if (likeBtn) {
                 likeBtn.click();
             }
         }
-        lastClick = now;
+        lastClickTime = now;
     });
 
     return el;
@@ -141,9 +145,19 @@ function setupMainCarousel() {
     if (!carousel) return;
 
     const track = carousel.querySelector('.carousel-track');
-    const allArticles = ARTICLES.sort(() => 0.5 - Math.random());
-    const heroArticles = allArticles.slice(0, 5);
-    let currentIndex = 0;
+    // Filtra para obtener 5 artículos destacados, si no hay, toma los 5 más recientes
+    const heroArticles = ARTICLES
+        .filter(a => a.tags.includes('destacados'))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 5);
+
+    if (heroArticles.length < 5) {
+        // Si no hay suficientes, toma los más recientes y únicos
+        const recentArticles = ARTICLES
+            .sort((a,b) => new Date(b.date) - new Date(a.date))
+            .filter(a => !heroArticles.includes(a));
+        heroArticles.push(...recentArticles.slice(0, 5 - heroArticles.length));
+    }
     
     if (heroArticles.length === 0) return;
 
@@ -153,14 +167,30 @@ function setupMainCarousel() {
     });
 
     const totalCards = heroArticles.length;
-    
-    setInterval(() => {
+    let currentIndex = 0;
+    let autoScrollInterval;
+
+    function startAutoScroll() {
+        if (autoScrollInterval) {
+            cancelAnimationFrame(autoScrollInterval);
+        }
+        autoScrollInterval = requestAnimationFrame(animateScroll);
+    }
+
+    function animateScroll() {
         currentIndex = (currentIndex + 1) % totalCards;
-        // Se obtiene el ancho de la tarjeta y el espacio entre tarjetas para un cálculo más preciso.
         const cardWidth = track.firstElementChild.offsetWidth;
         const gap = parseFloat(window.getComputedStyle(track).gap);
         track.style.transform = `translateX(-${currentIndex * (cardWidth + gap)}px)`;
-    }, 5000); // Cambia de slide cada 5 segundos
+        autoScrollInterval = requestAnimationFrame(animateScroll);
+    }
+
+    // Retrasar el inicio del carrusel para que no sea instantáneo
+    setTimeout(startAutoScroll, 5000); // Inicia después de 5 segundos
+
+    // Pausar al pasar el mouse
+    carousel.addEventListener('mouseenter', () => cancelAnimationFrame(autoScrollInterval));
+    carousel.addEventListener('mouseleave', startAutoScroll);
 }
 
 /* ---------------------------
@@ -266,6 +296,7 @@ function downloadPDF(article) {
 function setupHamburger() {
     const burger = $('#hamburger');
     const nav = $('.nav');
+    const navLinks = $$('.nav-list a');
 
     if (!burger || !nav) return;
 
@@ -276,7 +307,7 @@ function setupHamburger() {
     });
 
     // Cierra el menú de hamburguesa cuando se hace clic en un enlace de navegación
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.forEach(a => a.addEventListener('click', () => {
         if (window.innerWidth < 769) { // Se cierra solo en dispositivos móviles
             nav.classList.remove('show');
             burger.classList.remove('active');
@@ -304,6 +335,27 @@ function setupLazy() {
         lazyImgs.forEach(img => io.observe(img));
     } else {
         lazyImgs.forEach(img => img.src = img.dataset.src);
+    }
+}
+
+/* ---------------------------
+    Intersection Observers para animaciones
+    --------------------------- */
+function setupIntersections() {
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-in-view');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        $$('.section-row').forEach(sec => observer.observe(sec));
+        $$('.video-section').forEach(sec => observer.observe(sec));
+        $$('.footer').forEach(sec => observer.observe(sec));
+        $('.header').classList.add('is-in-view'); // El header siempre es visible
     }
 }
 

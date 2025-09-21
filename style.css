@@ -6,8 +6,8 @@
     --secondary-bg: #E2E8F0;
     --primary-color: #007000; /* Verde principal */
     --primary-color-hover: #005A00;
-    --primary-text: #1A202C; /* Ajuste para un contraste más profesional */
-    --secondary-text: #4A5568; /* Ajuste para un mejor contraste */
+    --primary-text: #1A202C;
+    --secondary-text: #4A5568;
     --accent-1: #E53E3E; /* Rojo de acento */
     --shadow-light: 0 4px 12px rgba(0,0,0,0.08);
     --shadow-medium: 0 10px 30px rgba(0,0,0,0.15);
@@ -32,12 +32,13 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: background-color 0.3s ease;
+    overflow-x: hidden; /* Evita desbordamiento horizontal */
 }
 
 .container {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 0 1.5rem; 
+    padding: 0 1.5rem;
 }
 
 h1, h2, h3 {
@@ -46,19 +47,19 @@ h1, h2, h3 {
     margin-top: 0;
 }
 
-h1 { 
-    font-size: clamp(2.8rem, 7vw, 4.5rem); 
-    font-weight: 700; 
-    font-family: 'Playfair Display', serif; 
+h1 {
+    font-size: clamp(2.8rem, 7vw, 4.5rem);
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
     letter-spacing: -2px;
 }
-h2 { 
-    font-size: clamp(2rem, 5vw, 3rem); 
+h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
 }
-h3 { 
-    font-size: clamp(1.5rem, 3vw, 2rem); 
-    font-weight: 600; 
+h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
     font-family: 'Playfair Display', serif;
 }
 
@@ -117,25 +118,23 @@ a:hover {
 }
 
 /* ================================
-    Header & Logo Animation
+    Header & Navigation
     ================================ */
 .header {
     background-color: white;
     box-shadow: var(--shadow-light);
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
     transition: padding 0.3s, box-shadow 0.3s;
-    border-bottom: 4px solid var(--primary-color);
-    position: relative;
 }
 
 .header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .logo {
@@ -149,39 +148,21 @@ a:hover {
     transform: scale(1.05);
 }
 
-.logo-animation {
-    position: relative;
-    padding: 0.5rem 0;
+.logo-animated-ce {
+    width: 45px; /* Tamaño del SVG reducido */
+    height: 45px;
+    margin-right: 0.75rem;
 }
 
 .logo-text {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-size: clamp(1rem, 2.5vw, 1.5rem); /* Tamaño del texto reducido */
     color: var(--primary-color);
     position: relative;
     z-index: 10;
     transition: color 0.4s;
-}
-
-.logo-animation::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background: rgba(0, 112, 0, 0.15);
-    transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    z-index: 1;
-}
-
-.logo-animation:hover::before {
-    width: 100%;
-}
-
-.logo-animation:hover .logo-text {
-    color: var(--primary-color-hover);
+    white-space: nowrap; /* Evita que el texto se parta en varias líneas */
 }
 
 .nav-list {
@@ -189,15 +170,24 @@ a:hover {
     list-style: none;
     margin: 0;
     padding: 0;
+    flex-wrap: nowrap; /* Evita que los enlaces se rompan */
+    overflow-x: auto; /* Permite desplazamiento horizontal si no caben */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
+}
+
+.nav-list::-webkit-scrollbar {
+    display: none; /* Oculta la barra de desplazamiento en Webkit */
 }
 
 .nav-list li a {
     color: var(--secondary-text);
     font-weight: 600;
-    padding: 1rem 1.25rem; /* Ajustado para reducir el espaciado en escritorio */
+    padding: 1rem 0.75rem; /* Espaciado ajustado para que quepan todos */
     display: block;
     position: relative;
     transition: color 0.3s ease;
+    white-space: nowrap;
 }
 
 .nav-list li a:hover {
@@ -207,7 +197,7 @@ a:hover {
 .nav-list li a::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -8px; /* Posición ajustada para que no interfiera con el padding */
     left: 50%;
     transform: translateX(-50%);
     width: 0;
@@ -218,6 +208,25 @@ a:hover {
 
 .nav-list li a:hover::after {
     width: 100%;
+}
+
+/* Franjas de la bandera */
+.flag-stripes {
+    display: flex;
+    width: 100%;
+    height: 6px; /* Altura de las franjas */
+    background-color: white;
+}
+.flag-stripes::before,
+.flag-stripes::after {
+    content: '';
+    flex: 1;
+}
+.flag-stripes::before {
+    background-color: #007000; /* Verde */
+}
+.flag-stripes::after {
+    background-color: #E53E3E; /* Rojo */
 }
 
 /* ================================
@@ -233,6 +242,7 @@ a:hover {
     z-index: 2000;
     padding: 0.75rem;
     will-change: transform;
+    position: relative;
 }
 
 .hamburger .bar {
@@ -243,6 +253,14 @@ a:hover {
     transition: transform 0.4s ease, opacity 0.4s;
 }
 
+@media (max-width: 900px) {
+    .nav {
+        display: none;
+    }
+    .hamburger {
+        display: flex;
+    }
+}
 @media (max-width: 768px) {
     .nav {
         position: fixed;
@@ -259,6 +277,7 @@ a:hover {
         display: flex;
         flex-direction: column;
         align-items: center;
+        border-right: 4px solid var(--primary-color);
     }
     
     .nav.show {
@@ -290,17 +309,13 @@ a:hover {
     .nav-list li a {
         padding: 1.5rem;
         width: 100%;
-        font-size: 1.3rem;
+        font-size: 1.2rem; /* Tamaño de fuente ajustado */
         font-weight: 500;
         color: var(--primary-text);
     }
     
     .nav-list li a::after {
         display: none;
-    }
-
-    .hamburger {
-        display: flex;
     }
 
     .hamburger.active .bar:nth-child(2) {
@@ -317,6 +332,7 @@ a:hover {
     }
 }
 
+
 /* ================================
     Hero Section & Carousel
     ================================ */
@@ -324,7 +340,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     gap: 4rem;
-    padding: 8rem 2rem;
+    padding: 6rem 2rem; /* Espaciado ajustado */
     align-items: center;
     background-color: var(--secondary-bg);
     text-align: center;
@@ -338,7 +354,7 @@ a:hover {
     .main-hero {
         flex-direction: row;
         justify-content: space-between;
-        padding: 10rem 3rem;
+        padding: 8rem 3rem; /* Espaciado ajustado */
         text-align: left;
     }
     
@@ -354,7 +370,7 @@ a:hover {
 }
 
 .hero-carousel {
-    max-width: 500px; /* Reducido para que sea más pequeño y proporcionado */
+    max-width: 450px; /* Reducido para que sea más pequeño y proporcionado */
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -373,7 +389,7 @@ a:hover {
 .hero-carousel .carousel-track {
     display: flex;
     transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-    gap: 2.5rem;
+    gap: 2rem; /* Espacio entre tarjetas reducido */
     will-change: transform;
 }
 
@@ -434,25 +450,6 @@ a:hover {
     position: relative;
 }
 
-.video-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 12px;
-    background-image: linear-gradient(to right, #007000, white, #E53E3E);
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.5s ease-in, transform 0.5s ease-in;
-    will-change: opacity, transform;
-}
-
-.video-section.is-in-view::before {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 .video-section h2 {
     text-align: center;
     color: var(--primary-text);
@@ -496,25 +493,6 @@ a:hover {
 .section-row {
     padding: 6rem 0;
     position: relative;
-}
-
-.section-row::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 12px;
-    background-image: linear-gradient(to right, #007000, white, #E53E3E);
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.5s ease-in, transform 0.5s ease-in;
-    will-change: opacity, transform;
-}
-
-.section-row.is-in-view::before {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .section-header {
@@ -564,7 +542,7 @@ a:hover {
 
 @media (max-width: 768px) {
     .card {
-        flex-basis: 80vw; /* Ajustado para que se vea mejor en móviles, dejando un poco de espacio */
+        flex-basis: 80vw;
     }
 }
 
@@ -666,37 +644,41 @@ a:hover {
     100% { transform: scale(1); }
 }
 
-/* FOOTER */
+/* ================================
+    Footer
+    ================================ */
 .footer {
     background-color: var(--primary-text);
     color: white;
     text-align: center;
-    padding: 4rem 0;
+    padding: 2.5rem 0; /* Espaciado reducido para hacerlo más compacto */
     font-size: 1rem;
     position: relative;
-    padding-top: 5rem; 
 }
 
-.footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 12px;
-    background-image: linear-gradient(to right, #007000, white, #E53E3E);
-    transform: translateY(-100%);
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    will-change: transform;
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
 }
 
-.footer.is-in-view::before {
-    transform: translateY(0);
+.footer-logo-left, .footer-logo-right {
+    width: 50px; /* Tamaño del logo circular */
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--secondary-bg); /* Color de fondo temporal para los logos */
+    border: 2px solid var(--accent-1);
+    flex-shrink: 0;
+}
+
+.footer-center-content {
+    flex-grow: 1;
 }
 
 .footer p {
-    margin: 0;
-    font-size: 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.9rem; /* Tamaño de fuente más pequeño */
 }
 
 /* ================================
@@ -762,7 +744,7 @@ a:hover {
     transform: rotate(90deg) scale(1.2);
 }
 
-/* AÑADIDO: Estilos de tipografía para el contenido del modal */
+/* Estilos de tipografía para el contenido del modal */
 #modalContent h2 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(1.8rem, 5vw, 2.5rem);
