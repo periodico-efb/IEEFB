@@ -3,225 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Click-Eduardo - Periódico Académico</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Click-Eduardo | El Periódico Digital de la Comunidad</title>
+    <meta name="description" content="Click-Eduardo es el diario digital de nuestra institución. Mantente al tanto de las últimas noticias, proyectos y eventos de la comunidad académica, con secciones de cultura, deportes, salud y más.">
+    <meta name="keywords" content="periódico digital, noticias, institución educativa, colegio, estudiantes, docentes, cultura, deportes, salud, eventos, proyectos, curiosidades">
+    <meta name="author" content="Click-Eduardo Team">
+
+    <meta property="og:title" content="Click-Eduardo | El Periódico Digital de la Comunidad">
+    <meta property="og:description" content="El diario digital de nuestra comunidad, cubriendo las noticias más importantes y los eventos que nos conectan.">
+    <meta property="og:image" content="https://picsum.photos/seed/click-eduardo-og/1200/630">
+    <meta property="og:url" content="https://www.click-eduardo.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header class="header" role="banner">
-        <div class="container">
-            <a href="/" class="logo" aria-label="Ir a la página de inicio">
-                <div class="logo-animated-ce">
-                    <svg viewBox="0 0 100 100" class="ce-svg" aria-label="Logo Click-Eduardo CE">
-                        <defs>
-                            <linearGradient id="grad-green" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#007000;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#005A00;stop-opacity:1" />
-                            </linearGradient>
-                            <linearGradient id="grad-red" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#E53E3E;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#C53030;stop-opacity:1" />
-                            </linearGradient>
-                            <filter id="shadow">
-                                <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="rgba(0,0,0,0.3)"/>
-                            </filter>
-                        </defs>
-                        <circle cx="50" cy="50" r="48" fill="url(#grad-red)" class="outer-circle"></circle>
-                        <circle cx="50" cy="50" r="40" fill="white" class="inner-circle"></circle>
-                        
-                        <path id="pathC" d="M 60 25 A 25 25 0 1 0 35 50 A 25 25 0 0 0 60 75" 
-                                fill="none" stroke="url(#grad-green)" stroke-width="10" stroke-linecap="round" class="ce-path"/>
-                        
-                        <path id="pathE" d="M 40 40 L 65 40 M 40 50 L 60 50 M 40 60 L 65 60"
-                                fill="none" stroke="url(#grad-green)" stroke-width="10" stroke-linecap="round" class="ce-path"/>
-                    </svg>
-                </div>
-                <span class="logo-text">Click-Eduardo</span>
-            </a>
-            <nav class="nav" role="navigation" aria-label="Menú principal">
-                <ul class="nav-list" id="navList">
-                    <li><a href="#recientes">Recientes</a></li>
-                    <li><a href="#destacados">Destacados</a></li>
-                    <li><a href="#calificados">Calificados</a></li>
-                    <li><a href="#institucion">Institución</a></li>
-                    <li><a href="#deporte">Deporte</a></li>
-                    <li><a href="#social">Social</a></li>
-                    <li><a href="#salud">Salud</a></li>
-                    <li><a href="#cultura">Cultura</a></li>
-                    <li><a href="#notas-curiosas">Notas Curiosas</a></li>
-                </ul>
-            </nav>
-            <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-        </div>
-    </header>
-    <div class="flag-stripes"></div>
+    <div class="header-flag-stripes">
+        <div class="flag-stripe green"></div>
+        <div class="flag-stripe white"></div>
+        <div class="flag-stripe red"></div>
+    </div>
 
-    <main id="main-content">
-        <section class="main-hero">
-            <div class="hero-left">
-                <h1>Click-Eduardo</h1>
-                <p>La vida del colegio, los proyectos y las historias de estudiantes y docentes — tu colegio en un solo click.</p>
-                <a href="#articulos" class="btn primary">Explorar Secciones</a>
+    <div class="page-wrapper">
+        
+        <header class="main-header" role="banner">
+            <div class="container header-content-wrapper">
+                <a href="/" class="site-logo" aria-label="Ir a la página de inicio de Click-Eduardo">
+                    <span class="logo-text">CLICK-EDUARDO</span>
+                </a>
+
+                <button class="menu-toggle" id="menu-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Abrir menú principal">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+                <nav class="main-nav" id="main-nav" role="navigation" aria-label="Menú principal de secciones">
+                    <ul class="nav-list">
+                        <li><a href="#destacadas" class="nav-link">Destacadas</a></li>
+                        <li><a href="#recientes" class="nav-link">Recientes</a></li>
+                        <li><a href="#institucion" class="nav-link">Institución</a></li>
+                        <li><a href="#deporte" class="nav-link">Deporte</a></li>
+                        <li><a href="#cultura" class="nav-link">Cultura</a></li>
+                        <li><a href="#salud" class="nav-link">Salud</a></li>
+                        <li><a href="#curiosidades" class="nav-link">Curiosidades</a></li>
+                    </ul>
+                </nav>
+
+                <div class="social-links">
+                    <a href="https://www.facebook.com" target="_blank" aria-label="Síguenos en Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank" aria-label="Síguenos en Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
             </div>
-            <div class="hero-right">
-                <div class="carousel hero-carousel" data-section="all-articles">
-                    <div class="carousel-track">
+        </header>
+
+        <main id="main-content" role="main">
+            <section class="main-hero-slider" aria-label="Noticias destacadas principales">
+                <div class="hero-slider-track" id="hero-slider-track">
+                    </div>
+                <div class="hero-slider-dots" id="hero-slider-dots">
+                    </div>
+            </section>
+
+            <section id="calificadas" class="section-row" aria-labelledby="calificadas-title">
+                <div class="section-header container">
+                    <h2 id="calificadas-title" class="section-title">Lo Más Calificado</h2>
+                    <span class="header-line"></span>
+                </div>
+                <div class="container carousel-wrapper">
+                    <div class="carousel" data-section="calificadas">
+                        <div class="carousel-track" id="calificadas-track">
+                            </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="video-section">
-            <div class="container">
-                <h2>Video Destacado</h2>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </section>
+            
+            <section id="recientes" class="section-row" aria-labelledby="recientes-title">
+                <div class="section-header container">
+                    <h2 id="recientes-title" class="section-title">Noticias Recientes</h2>
+                    <span class="header-line"></span>
                 </div>
-            </div>
-        </section>
-
-        <div id="articulos">
-            <section class="section-row" id="recientes">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Recientes</h2>
-                    </div>
+                <div class="container carousel-wrapper">
                     <div class="carousel" data-section="recientes">
-                        <div class="carousel-track">
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="section-row" id="destacados">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Destacados</h2>
-                    </div>
-                    <div class="carousel" data-section="destacados">
-                        <div class="carousel-track">
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="section-row" id="calificados">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Calificados</h2>
-                    </div>
-                    <div class="carousel" data-section="calificados">
-                        <div class="carousel-track">
-                        </div>
+                        <div class="carousel-track" id="recientes-track">
+                            </div>
                     </div>
                 </div>
             </section>
 
-            <section class="section-row" id="institucion">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Institución</h2>
-                    </div>
-                    <div class="carousel" data-section="institucion">
-                        <div class="carousel-track">
-                        </div>
-                    </div>
+            <section id="cultura" class="section-row" aria-labelledby="cultura-title">
+                <div class="section-header container">
+                    <h2 id="cultura-title" class="section-title">Cultura</h2>
+                    <span class="header-line"></span>
                 </div>
-            </section>
-
-            <section class="section-row" id="deporte">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Deporte</h2>
-                    </div>
-                    <div class="carousel" data-section="deporte">
-                        <div class="carousel-track">
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="section-row" id="social">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Social</h2>
-                    </div>
-                    <div class="carousel" data-section="social">
-                        <div class="carousel-track">
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section-row" id="salud">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Salud</h2>
-                    </div>
-                    <div class="carousel" data-section="salud">
-                        <div class="carousel-track">
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section-row" id="cultura">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Cultura</h2>
-                    </div>
+                <div class="container carousel-wrapper">
                     <div class="carousel" data-section="cultura">
-                        <div class="carousel-track">
-                        </div>
+                        <div class="carousel-track" id="cultura-track">
+                            </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="deporte" class="section-row" aria-labelledby="deporte-title">
+                <div class="section-header container">
+                    <h2 id="deporte-title" class="section-title">Deporte</h2>
+                    <span class="header-line"></span>
+                </div>
+                <div class="container carousel-wrapper">
+                    <div class="carousel" data-section="deporte">
+                        <div class="carousel-track" id="deporte-track">
+                            </div>
                     </div>
                 </div>
             </section>
             
-            <section class="section-row" id="notas-curiosas">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Notas Curiosas</h2>
-                    </div>
-                    <div class="carousel" data-section="notas-curiosas">
-                        <div class="carousel-track">
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
+        </main>
 
-    <footer class="footer" role="contentinfo">
-        <div class="container footer-content">
-            <div class="footer-logo-left">
+        <footer class="main-footer" role="contentinfo">
+            <div class="footer-flag-stripes"></div>
+            <div class="container footer-content-wrapper">
+                <div class="footer-section">
+                    <h3 class="footer-heading">Contacto</h3>
+                    <p>Av. Principal, 123<br>Ciudad, País</p>
+                    <p>contacto@click-eduardo.com</p>
                 </div>
-            <div class="footer-center-content">
-                <p>&copy; <span id="year"></span> Click-Eduardo. Todos los derechos reservados.</p>
-                <p>Visitas: <span id="visits-count">0</span></p>
+                <div class="footer-section footer-center-section">
+                    <a href="/" class="footer-logo">
+                        <span class="logo-text">CLICK-EDUARDO</span>
+                    </a>
+                    <p class="footer-tagline">El diario digital que te conecta con tu comunidad.</p>
+                    <div class="visits-counter">
+                        <p class="visits-count-label">Visitas:</p>
+                        <p class="visits-count" id="visits-count">0</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-heading">Síguenos</h3>
+                    <div class="social-links-footer">
+                        <a href="https://www.facebook.com" target="_blank" aria-label="Síguenos en Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com" target="_blank" aria-label="Síguenos en Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="footer-logo-right">
+            <div class="footer-bottom">
+                <div class="container">
+                    <p>&copy; <span id="year">2024</span> Click-Eduardo. Todos los derechos reservados.</p>
                 </div>
-        </div>
-    </footer>
+            </div>
+        </footer>
+    </div>
 
-    <div class="modal" id="modal" aria-hidden="true" role="dialog">
+    <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" tabindex="-1">
         <div class="modal-content-wrapper">
             <button class="modal-close" id="modalClose" aria-label="Cerrar artículo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             <div class="modal-content" id="modalContent">
-            </div>
+                </div>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
