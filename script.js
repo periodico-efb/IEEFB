@@ -1,27 +1,18 @@
-/* ==========================================================================
-   Project: Clic-Eduardo
-   Description: Core JavaScript functionality for the digital newspaper.
-   Author: Refactored by Gemini AI
-   ========================================================================== */
 
-/**
- * Módulo de Almacenamiento de Datos.
- * Gestiona el acceso a los datos estáticos y del localStorage.
- */
 const Data = (() => {
-    // Definición de los artículos, simulando una base de datos.
+  
     const ARTICLES = [
        {
   id: 'art-002',
-  title: 'La Institución Educativa Eduardo Fernández Botero se prepara para celebrar sus 55 años',
-  category: 'institucion',
-  excerpt: 'A pocos meses de la gran fecha, la comunidad educativa afina detalles para conmemorar más de medio siglo de trayectoria con actos culturales, celebración y un encuentro con egresados que promete ser inolvidable.',
-  content: 'La Institución Educativa Eduardo Fernández Botero se encuentra a las puertas de un momento muy especial en su historia: la celebración de sus 55 años de vida académica. Lo que en sus inicios fue un proyecto educativo con sueños locales, hoy se ha consolidado como un referente de formación integral, valores y compromiso con la comunidad. Ahora, toda la familia educativa se alista para rendir homenaje a esta trayectoria que ha dejado huella en varias generaciones. En los últimos meses, estudiantes, docentes, directivos, padres de familia y egresados han unido esfuerzos para diseñar una agenda conmemorativa. Más que una simple festividad, el aniversario busca convertirse en un espacio de reencuentro, memoria y orgullo institucional, donde cada participante pueda sentirse parte de una historia compartida que continúa creciendo.',
+  title: 'Festival de Rondas Infantiles, Ritmos y Gimnasia.',
+  category: 'deporte',
+  excerpt: 'La IE Eduardo Fernández Botero invita al Festival de Rondas Infantiles, Ritmos y Gimnasia, un evento lleno de música, color y alegría este 12 de noviembre en el coliseo municipal.',
+  content: 'La Institución Educativa Eduardo Fernández Botero invita a toda la comunidad de Amalfi a disfrutar de un evento lleno de color, música y diversión: el Festival de Rondas Infantiles, Ritmos y Gimnasia. La cita es el miércoles 12 de noviembre de 2025 en el coliseo cubierto municipal, donde los niños y niñas de Preescolar y Primaria mostrarán todo su talento, creatividad y entusiasmo con presentaciones que prometen robarse los aplausos. Será una jornada para disfrutar en familia, apoyar a los más pequeños y compartir momentos de alegría y orgullo. El valor de la entrada es de $5.000 por persona, y lo recaudado servirá para seguir impulsando las actividades culturales de la institución.   ¡No te lo pierdas! Ven a vivir con nosotros una mañana llena de ritmo, sonrisas y mucho corazón.',
   author: 'Equipo Click-Eduardo',
-  date: '2025-08-29',
-  image: '55 años.png',
+  date: '2025-11-08',
+  image: 'rondas.jpeg',
   score: 5,
-  tags: ['recientes', 'destacados', 'institucion']},
+  tags: [ 'destacados', 'deporte']},
    {
   id: 'art-003',
   title: 'Cristina Marín: un ejemplo de investigación e innovación educativa',
@@ -87,6 +78,19 @@ const Data = (() => {
 
 {
   id: 'art-008',
+  title: 'Orgullo académico en el Festival del Saber 2025.',
+  category: 'institucion',
+  excerpt: 'La IE Eduardo Fernández Botero brilló en el Festival del Saber 2025, logrando tres primeros lugares y un segundo lugar.',
+  content: 'La IE Eduardo Fernández Botero se destacó en el Festival Municipal del Saber 2025 con excelentes resultados, reflejando el compromiso y la excelencia de sus estudiantes. El Festival Municipal del Saber 2025 reunió a los mejores estudiantes de las instituciones educativas de Amalfi en una jornada dedicada al conocimiento, la disciplina y el esfuerzo académico. En esta competencia, organizada por la Administración Municipal, los participantes demostraron sus habilidades en áreas como Matemáticas, Español, Ciencias Naturales, Sociales e Inglés. La Institución Educativa Eduardo Fernández Botero tuvo una destacada participación, alcanzando tres primeros lugares en las categorías A, C y D, y un segundo lugar en la categoría B. Estos resultados reflejan el trabajo constante de los docentes y el compromiso de los estudiantes por superarse cada día. Este logro reafirma la importancia de seguir fortaleciendo los espacios que promueven la educación y el talento de los jóvenes amalfitanos, quienes con su dedicación dejan en alto el nombre de la institución y del municipio.',
+  author: 'Equipo Click-Eduardo',
+  date: '2025-11-05',
+  image: 'saber.jpeg',
+  score: 4.9,
+  tags: [ 'recientes', 'destacados', 'institucion']
+},
+
+{
+  id: 'art-009',
   title: 'Estudiantes de la I.E. Eduardo Fernández Botero se destacan en la fase departamental de los Juegos Supérate Intercolegiados',
   category: 'deporte',
   excerpt: 'La institución celebró la participación de sus deportistas en La Ceja, Antioquia, quienes demostraron disciplina y entrega en cada competencia.',
@@ -97,7 +101,6 @@ const Data = (() => {
   score: 4.7,
   tags: [ 'recientes', 'destacados', 'deporte']
 },
-
 
     ];
 

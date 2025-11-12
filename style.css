@@ -1,16 +1,11 @@
-/* ==========================================================================
-   Project: Click-Eduardo
-   Description: Core CSS styling for the digital newspaper.
-   ========================================================================== */
 
-/* ==========================================================================
-   Global Variables & Base Styles
-   ========================================================================== */
+
+
 :root {
-    /* Color Palette */
-    --color-primary: #007000; /* Verde Principal (inspirado en El Tiempo) */
+
+    --color-primary: #007000; 
     --color-primary-dark: #005A00;
-    --color-accent: #E53E3E; /* Rojo de acento (para noticias destacadas) */
+    --color-accent: #E53E3E; 
     --color-text-dark: #1A202C;
     --color-text-light: #4A5568;
     --color-background: #F7FAFC;
@@ -18,17 +13,17 @@
     --color-white: #FFFFFF;
     --color-black: #000000;
 
-    /* Flag Colors */
+    
     --flag-green: #00884A;
     --flag-white: #FFFFFF;
     --flag-red: #D4261C;
 
-    /* Typography */
+
     --font-serif: 'Merriweather', serif;
     --font-sans: 'Roboto', sans-serif;
     --font-heading: 'Merriweather', serif;
 
-    /* Spacing & Layout */
+   
     --container-max-width: 1300px;
     --spacing-1: 0.5rem;
     --spacing-2: 1rem;
@@ -40,7 +35,7 @@
     --border-radius-medium: 16px;
     --border-radius-large: 24px;
     
-    /* Shadows & Effects */
+    /* Shadows */
     --shadow-small: 0 2px 8px rgba(0,0,0,0.06);
     --shadow-medium: 0 10px 30px rgba(0,0,0,0.15);
     --shadow-large: 0 25px 60px rgba(0,0,0,0.4);
@@ -271,12 +266,12 @@ a:hover {
 
 .social-links {
     display: flex;
-    gap: var(--spacing-4); /* Aumenta el espacio entre los iconos */
-    margin-left: auto; /* Mueve los iconos a la izquierda */
+    gap: var(--spacing-4); 
+    margin-left: auto;
 }
 .social-links a {
     color: var(--color-text-light);
-    font-size: 1.5rem; /* Aumenta el tamaño del icono */
+    font-size: 1.5rem;
     transition: color var(--transition-fast), transform var(--transition-fast);
 }
 .social-links a:hover {
